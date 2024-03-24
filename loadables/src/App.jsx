@@ -12,17 +12,30 @@ function App() {
 
 function Todo({id}) {
    const [todo, setTodo] = useRecoilStateLoadable(todosAtomFamily(id));
+
+   //content
+   //state
    if (todo.state === "loading") {
       return <div>loading</div>
    }
+   //loading
+   //hasValue
+   //hasError
+
+   else if (todo.state === "hasValue"){
+    return (
+      <>
+        {todo.contents.title}
+        {todo.contents.description}
+        <br />
+      </>
+    )
+   }
+
+   else if (todo.state === "hasError"){
+    return <div>Backend throw an error</div>
+   }
    
-   return (
-    <>
-      {todo.contents.title}
-      {todo.contents.description}
-      <br />
-    </>
-  )
 }
 
 export default App
